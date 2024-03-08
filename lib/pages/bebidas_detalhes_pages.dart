@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class PageBebidasDetalhes extends StatefulWidget {
-  const PageBebidasDetalhes({super.key});
 
   @override
   State<PageBebidasDetalhes> createState() => _PageBebidasDetalhesState();

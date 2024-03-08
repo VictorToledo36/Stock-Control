@@ -3,12 +3,33 @@ import 'package:aplic/pages/doces_detalhes_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:aplic/pages/cadastro_produtos_pages.dart';
 
-void main() {
-  runApp(const HomePage());
+PreferredSizeWidget CustomAppBar() {
+  return AppBar(
+    title: Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.white,
+          ),
+          child: const Icon(
+            Icons.store,
+            size: 30,
+            color: Colors.orange,
+          ),
+        ),
+        const SizedBox(width: 10),
+        const Text(
+          'Controle de Estoque',
+          style: TextStyle(fontSize: 20),
+        ),
+      ],
+    ),
+  );
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,129 +39,160 @@ class HomePage extends StatelessWidget {
     ];
 
     return Scaffold(
+      appBar: CustomAppBar(),
+      backgroundColor: Colors.orange,
       body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: GridView.count(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10.0,
-                    crossAxisSpacing: 10.0,
-                    children: List.generate(
-                      nomesDosProdutos.length,
-                      (index) {
-                        String imagePath;
-                        if (index == 0) {
-                          imagePath = 'images/bebidas.png';
-                        } else if (index == 1) {
-                          imagePath = 'images/doces.jpg';
-                        } else {
-                          imagePath = 'images/doces.jpg';
-                        }
-                        return GestureDetector(
-                          onTap: () {
-                            if (index == 0) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => PageBebidasDetalhes(),
-                                ),
-                              );
-                            } else if (index == 1) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => PageDocesDetalhes(),
-                                ),
-                              );
-                            }
-                          },
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            elevation: 5.0,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  imagePath,
-                                  width: 100,
-                                  height: 100,
-                                ),
-                                const SizedBox(height: 10),
-                                Text(
-                                  nomesDosProdutos[index],
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Cadastro',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ElevatedButton.icon(
-                              onPressed: () {
+          Positioned(
+            top: kToolbarHeight +
+                -50, // Define a distância a partir do topo considerando a altura da app bar
+            left: 10, // Define a posição à esquerda
+            right: 10, // Define a posição à direita
+            child: Center(
+              child: Image.asset(
+                'images/logoatt.png', // Substitua pelo caminho correto da sua imagem
+                width: 300, // Defina a largura da imagem conforme necessário
+                height: 300, // Defina a altura da imagem conforme necessário
+              ),
+            ),
+          ),
+          Positioned.fill(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: 5,
+                right: 5,
+                top: 310,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      children: List.generate(
+                        nomesDosProdutos.length,
+                        (index) {
+                          String imagePath;
+                          if (index == 0) {
+                            imagePath = 'images/bebidas.png';
+                          } else if (index == 1) {
+                            imagePath = 'images/doces.jpg';
+                          } else {
+                            imagePath = 'images/doces.jpg';
+                          }
+                          return GestureDetector(
+                            onTap: () {
+                              if (index == 0) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) =>
-                                        const PageCadastroProdutos(),
+                                    builder: (_) =>  PageBebidasDetalhes(),
                                   ),
                                 );
-                              },
-                              icon: const Icon(Icons.local_grocery_store),
-                              label: const Text('Cadastrar Produtos'),
-                            ),
-                            ElevatedButton.icon(
-                              onPressed: () {
+                              } else if (index == 1) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) =>
-                                        const PageCadastroProdutos(),
+                                    builder: (_) =>  PageDocesDetalhes(),
                                   ),
                                 );
-                              },
-                              icon: const Icon(Icons.assignment),
-                              label: const Text('Categoria'),
+                              }
+                            },
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              elevation: 5.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    imagePath,
+                                    width: 100,
+                                    height: 100,
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    nomesDosProdutos[index],
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ],
-                        ),
-                      ],
+                          );
+                        },
+                      ),
                     ),
                   ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom:
+                30, // Ajusta a distância do container em relação ao fundo da tela
+            left:
+                10, // Ajusta a distância do container em relação à lateral esquerda da tela
+            right:
+                10, // Ajusta a distância do container em relação à lateral direita da tela
+            child: Container(
+              padding: const EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: Colors.deepOrangeAccent,
+                  width: 1,
                 ),
-              ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Cadastro',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const PageCadastroProdutos(),
+                            ),
+                          );
+                        },
+                        icon: const Icon(Icons.local_grocery_store),
+                        label: const Text('Categorias'),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const PageCadastroProdutos(),
+                            ),
+                          );
+                        },
+                        icon: const Icon(Icons.assignment),
+                        label: const Text('Produtos'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],
