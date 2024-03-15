@@ -45,14 +45,14 @@ class HomePage extends StatelessWidget {
         children: [
           Positioned(
             top: kToolbarHeight +
-                -50, // Define a distância a partir do topo considerando a altura da app bar
-            left: 10, // Define a posição à esquerda
-            right: 10, // Define a posição à direita
+                -50, 
+            left: 10, 
+            right: 10, 
             child: Center(
               child: Image.asset(
-                'images/logoatt.png', // Substitua pelo caminho correto da sua imagem
-                width: 300, // Defina a largura da imagem conforme necessário
-                height: 300, // Defina a altura da imagem conforme necessário
+                'images/logoatt.png', 
+                width: 300, 
+                height: 300, 
               ),
             ),
           ),
